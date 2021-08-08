@@ -1,0 +1,34 @@
+<%# form_with(model: @blog, local: true, url: confirm_blogs_path ) do |form| %>
+
+<%# form_with(model: @blog, if action_name == 'new' url: confirm_blogs_path else blog_path end) do |form| %>
+
+<%= form_with(model: @blog, local: true, url: choose_new_or_edit  ) do |form| %>
+
+<%# form_withはビューヘルパーの一種です。ビューヘルパーはRailsに用意された、HTMLを生成するためのメソッドです。%>
+<%# form_with(model: モデルのインスタンス) %>
+<%# @blog = Blog.newなどといったような形でインスタンス変数に入れられる %>
+<%# form_withメソッドは、デフォルトではhtmlではなくJavaScriptのリソースを取得しようとしてしまうので、local: trueとすることで、HTML用のリクエストを発行するようにします。htmlのページを表示させるのであればform_withにlocal: trueをつけておく、といった大まかな理解で大丈夫です %>
+<%# url: confirm_blogs_pathのurlオプションを与えることで、blogs#confirmを実行するように %>
+
+  <% if @blog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @blog.errors.count %>件のエラーがあります。</h2>
+      <ul>
+      <% @blog.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="blog_title">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div class="blog_content">
+    <%= form.label :content %>
+    <%= form.text_field :content %>
+  </div>
+  <%= form.submit %>
+<% end %>
+<%= link_to 'もどる', blogs_path %>

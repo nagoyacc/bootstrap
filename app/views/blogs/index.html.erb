@@ -1,0 +1,29 @@
+<% content_for :title do %>サンプルアプリ<% end %>
+<h1>ブログ一覧</h1>
+<p><%= notice %></p>
+<table>
+  <tr>
+    <th class="topid">ID</th>
+    <th class="toptd">タイトル</th>
+    <th class="toptd">内容</th>
+    <th class="toptd2">投稿時間</th>
+    <th class="toptd2">編集時間</th>
+    <th class="toptd2">詳細</th>
+    <th class="toptd2">編集</th>
+    <th class="toptd2">削除</th>
+  </tr>
+<% @blogs.each do |blog| %>
+<%# eachメソッドを使用することで配列の中身を1つ1つ展開できます%>
+  <tr>
+    <td class="topid"><%= blog.id %></td>
+    <td class="toptd"><%= blog.title %></td>
+    <td class="toptd"><%= blog.content %></td>
+    <td class="toptd"><%= blog.created_at %></td>
+    <td class="toptd"><%= blog.updated_at %></td>
+    <td class="toptd2"><%= link_to '○', blog_path(blog.id) %></td>
+    <td class="toptd2"><%= link_to '○', edit_blog_path(blog.id) %></td>
+    <td class="toptd2"><%= link_to '○', blog_path(blog.id), method: :delete, data: { confirm: '本当に削除していいですか？'} %></td>
+  </tr>
+<% end %>
+<%= link_to '新しくブログを投稿する', new_blog_path %>
+</table>
