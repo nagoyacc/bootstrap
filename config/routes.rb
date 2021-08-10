@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
   resources :feeds
   # get    '/blogs'          ,to: 'blogs#index'
   # post   '/blogs'          ,to: 'blogs#create'
@@ -14,4 +15,9 @@ Rails.application.routes.draw do
       post :confirm
     end
   end
+
+  resources :sessions, only: [:new, :create, :destroy]
+  #form_withを使用するにはcreateアクションのルーティングが必要になる
+  resources :users, only: [:new, :create, :show]
+
 end
